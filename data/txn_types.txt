@@ -1,0 +1,46 @@
+Session Start	111
+Session End	112
+Search	113
+Sim Access Denial	114
+Retrieval	115
+Link Out	116
+Link In	117
+Browse or auxiliary search	118
+Post	119
+Interface Switch	120
+Search Clicks	121
+Result List Paging	123
+Personalization Action	124
+Guest authentication switch	125
+Page Turns	126
+eBook (online viewer) Content File Download	127
+Retrieval Part B	135
+Link In Failure	137
+Z-gateway error	199
+Login authentication	201
+Publication Authority Detail Retrieval	215
+Publication Finder Link Out	216
+Publication Finder Link In	217
+Placard Retrieval Transactions (Research Starters/Topic Overviews)	219
+New feature selection	310
+Application defined	311
+Security Warning	312
+Retrieval Flipster	315
+Full Text Finder Link Out	316
+Full Text Finder Link In	317
+Sim Access Request	401
+Sim Access Release	402
+Content Turnaway	403
+Content Turnaway Flipster	405
+Content Hold	404
+Attempt Checkout	406
+Attempt Checkout Detail	407
+Search Info	410
+Search Info Detail	411
+OpenURL Link out	503
+OpenURL link in	511
+OpenURL link out	513
+Primary Content Enrichment (NoveList Select)	603
+Secondary Content Enrichment (NoveList Select)	604
+Link Click (NoveList)	601
+NoveList UI Action  	607 
