@@ -86,22 +86,22 @@ class FrameSplitter:
     
     def get_csv_names(self, name, sets, path="out" ):
         types = zip( sets, [ 'train', 'test', 'validate'])
-        return [(( path + "/" + name + "_" + typ + ".csv"), data) for (data, typ) in types]
+        return [name, 
+                [(( path + "/" + name + "_" + typ + ".csv"), data) for (data, typ) in types]]
     
     def get_all_csv_names( self, dfs ):
         set_names = [self.get_csv_names( name, sets ) for (name, sets) in dfs]
         names=[]
         for i in set_names:
-            for j in i:
+            for j in i[1]:
                 names.append(j[0])
-#         return [name for [name,st] in set_names]
         return names
-
     
     def write_csvs( self, name, sets):
-#         [self.to_csv( data, os.path.join( csv_path, name + "_" + typ + ".csv")) for (data, typ) in zip( sets, [ 'train', 'test', 'validate'])]
-        csv_names = self.get_csv_names(name, sets)
+        [name,csv_names] = self.get_csv_names(name, sets)
         [self.to_csv( data, file_name ) for (file_name, data ) in csv_names]
+        return [name, 
+                [file_name for (file_name, data) in csv_names]]
         
     def make_all_csvs( self, dfs, split=0.4, sepr=',', ext='csv'):
         '''
@@ -113,6 +113,6 @@ class FrameSplitter:
         '''
         dfs = FrameSplitter.map_sets(self.reformat, dfs) # gives us a clean column set - [name, [y, xs]]...
         splits = self.train_splits( dfs, split, sepr, ext )  # gives us 3 samples - [name, [train, test, val]]
-        [self.write_csvs( name, sets ) for (name, sets) in splits]
+        return [self.write_csvs( name, sets ) for (name, sets) in splits]
          
             
