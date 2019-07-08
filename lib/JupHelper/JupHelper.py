@@ -1,5 +1,7 @@
 import pandas as pd
 import numpy as np
+import os
+import io
 
 class FrameSplitter:
     def __init__(self, y_col, ignore_cols):
@@ -82,18 +84,24 @@ class FrameSplitter:
         
         return splits
     
-    def get_csv_names(self, name, sets ):
+    def get_csv_names(self, name, sets, path="out" ):
         types = zip( sets, [ 'train', 'test', 'validate'])
-        return [(os.path.join( csv_path, name + "_" + typ + ".csv"), data) for (data, typ) in types]
+        return [(( path + "/" + name + "_" + typ + ".csv"), data) for (data, typ) in types]
     
     def get_all_csv_names( self, dfs ):
-        set_names = [get_csv_names( name, sets ) for (name, sets) in dfs]
-        return set_names
+        set_names = [self.get_csv_names( name, sets ) for (name, sets) in dfs]
+        names=[]
+        for i in set_names:
+            for j in i:
+                names.append(j[0])
+#         return [name for [name,st] in set_names]
+        return names
 
     
     def write_csvs( self, name, sets):
 #         [self.to_csv( data, os.path.join( csv_path, name + "_" + typ + ".csv")) for (data, typ) in zip( sets, [ 'train', 'test', 'validate'])]
-        [self.to_csv( data, file_name ) for (data, file_name) in get_csv_names(name, sets)]
+        csv_names = self.get_csv_names(name, sets)
+        [self.to_csv( data, file_name ) for (file_name, data ) in csv_names]
         
     def make_all_csvs( self, dfs, split=0.4, sepr=',', ext='csv'):
         '''
