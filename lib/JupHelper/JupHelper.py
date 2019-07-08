@@ -57,8 +57,8 @@ class FrameSplitter:
         y1 = df[df[self.y_col]==1]
         y0 = df[df[self.y_col]==0]
 
-        y1 = split_frame(y1, y_split)
-        y0 = split_frame(y0, y_split)
+        y1 = self.split_frame(y1, y_split)
+        y0 = self.split_frame(y0, y_split)
 
         dfs = []
         for i in range(3):
@@ -86,6 +86,11 @@ class FrameSplitter:
         types = zip( sets, [ 'train', 'test', 'validate'])
         return [(os.path.join( csv_path, name + "_" + typ + ".csv"), data) for (data, typ) in types]
     
+    def get_all_csv_names( self, dfs ):
+        set_names = [get_csv_names( name, sets ) for (name, sets) in dfs]
+        return set_names
+
+    
     def write_csvs( self, name, sets):
 #         [self.to_csv( data, os.path.join( csv_path, name + "_" + typ + ".csv")) for (data, typ) in zip( sets, [ 'train', 'test', 'validate'])]
         [self.to_csv( data, file_name ) for (data, file_name) in get_csv_names(name, sets)]
@@ -102,3 +107,4 @@ class FrameSplitter:
         splits = self.train_splits( dfs, split, sepr, ext )  # gives us 3 samples - [name, [train, test, val]]
         [self.write_csvs( name, sets ) for (name, sets) in splits]
          
+            
