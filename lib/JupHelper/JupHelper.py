@@ -29,7 +29,7 @@ class FrameSplitter:
             - y columns are at [0]
             - non-x, non-y columns are dropped so they don't affect training
         '''
-        df.to_csv( path_or_buf=file, sep=sepr,index=False, header=False)
+        return df.to_csv( path_or_buf=file, sep=sepr,index=False, header=False)
     
     def split_frame( self, df, train_frac ):
         '''
