@@ -1,6 +1,4 @@
 .ipynb_checkpoints
-*.csv
-out
 *.gz
 __pycache__
 .DS_Store
